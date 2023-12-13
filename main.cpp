@@ -9,9 +9,9 @@ struct Bar{
     double low;
     double close;
     double volume;
-    bool white;
+    bool color;
     void setColor(){
-        white = close > open;
+        color = close > open;
     }
 };
 
@@ -58,11 +58,11 @@ public:
         delete[] bar;
     }
     int displayDiagram(){
-        for(int i = 0; i < 50; i++){
+        for(int i = 50; i > 0; i--){
             double v = min + i * (amplitude / 49);
-            for(int j = 0; j < bars; j++) {
-                if(bar[j].white){
-                    std::cout << "\u001b[31m";
+            for(int j = 0; j < bars; j++){
+                if(bar[j].color){
+                    std::cout << "\u001b[32m";
                     if(bar[j].high <= v) std::cout << " ";
                     else if(bar[j].high > v && bar[j].close < v) std::cout << "\263";
                     else if(bar[j].open <= v && bar[j].close >= v) std::cout << "\333";
@@ -71,7 +71,7 @@ public:
                     else std::cout << "!";
                 }
                 else{
-                    std::cout << "\u001b[32m";
+                    std::cout << "\u001b[31m";
                     if(bar[j].high <= v) std::cout << " ";
                     else if(bar[j].high > v && bar[j].open < v) std::cout << "\263";
                     else if(bar[j].open >= v && bar[j].close <= v) std::cout << "\333";
